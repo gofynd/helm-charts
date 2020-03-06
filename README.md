@@ -1,6 +1,6 @@
 
 
-![HELM Charts](assets\images\helm.png)
+![HELM Charts](assets/images/helm.png)
 
 ## HELM Charts
 
