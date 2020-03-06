@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name:  {{ template "elasticsearch-data.name" . }}
+  labels:
+    app: elasticsearch
+    role: data
+spec:
+  serviceName: "elasticsearch-data"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: elasticsearch-data
+        role: data
+    spec:
+      containers:
+      - name:  {{ template "elasticsearch-data.name" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        env:
+        - name: CLUSTER_NAME
+          value: elasticsearch
+        - name: NODE_NAME
+          value: elasticsearch-data
+        - name: NODE_LIST
+          value: elasticsearch-master,elasticsearch-data,elasticsearch-client
+        - name: MASTER_NODES
+          value: elasticsearch-master
+    {{- with .Values.environmentVariables }}
+     {{- toYaml . | nindent 8}}
+    {{- end }}
+        ports:
+        - containerPort: 9300
+          name: transport
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          readOnly: false
+          subPath: elasticsearch.yml
+        - name: elasticsearch-data-persistent-storage
+          mountPath: /data/db
+        resources:
+{{ toYaml .Values.resources | indent 10 }} 
+      volumes:
+      - name: config
+        configMap:
+          name:  {{ template "elasticsearch-data.name" . }}-config
+ {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+{{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- end }}
+
+  volumeClaimTemplates:
+  - metadata:
+      name: "{{ .Values.persistence.name }}" 
+      annotations: 
+        volume.beta.kubernetes.io/storage-class: "{{ .Values.persistence.storageClass }}"
+    spec:
+      accessModes: [ "{{ .Values.persistence.accessModes }}" ]
+      storageClassName: "{{ .Values.persistence.storageClass }}" 
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }} 
+{{- if .Values.nodeSelector }}
+  nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+{{- if .Values.tolerations }}
+  tolerations: 
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- end }}  
+---
+
+

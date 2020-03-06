@@ -1,0 +1,70 @@
+# elasticsearch-client.deployment.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "elasticsearch-client.name" . }}
+  labels:
+    app: elasticsearch
+    role: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: client
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        role: client
+    spec:
+      containers:
+      - name: {{ template "elasticsearch-client.name" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        env:
+        - name: CLUSTER_NAME
+          value: elasticsearch
+        - name: NODE_NAME
+          value: elasticsearch-client
+        - name: NODE_LIST
+          value: elasticsearch-master,elasticsearch-data,elasticsearch-client
+        - name: MASTER_NODES
+          value: elasticsearch-master
+    {{- with .Values.environmentVariables }}
+     {{- toYaml . | nindent 8}}
+    {{- end }}
+        ports:
+        - containerPort: 9200
+          name: client
+        - containerPort: 9300
+          name: transport
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          readOnly: false
+          subPath: elasticsearch.yml
+        - name: storage
+          mountPath: /data
+          resources:
+{{ toYaml .Values.resources | indent 12 }}        
+
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "elasticsearch-client.name" . }}-config
+      - name: "storage"
+        emptyDir:
+          medium: ""
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+{{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- end }}
+
+
+---

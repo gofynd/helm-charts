@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "elasticsearch-master.name" . }}
+  labels:
+    app: elasticsearch
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: master
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        role: master
+    spec:
+      containers:
+      - name: {{ template "elasticsearch-master.name" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        env:
+        - name: CLUSTER_NAME
+          value: elasticsearch
+        - name: NODE_NAME
+          value: elasticsearch-master
+        - name: NODE_LIST
+          value: elasticsearch-master,elasticsearch-data,elasticsearch-client
+        - name: MASTER_NODES
+          value: elasticsearch-master
+    {{- with .Values.environmentVariables }}
+     {{- toYaml . | nindent 8}}
+    {{- end }}
+        ports:
+        - containerPort: 9300
+          name: transport
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          readOnly: false
+          subPath: elasticsearch.yml
+        - name: storage
+          mountPath: /data
+      volumes:
+      - name: config
+        configMap:
+          name: elasticsearch-master-config
+      - name: "storage"
+        emptyDir:
+          medium: ""
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+{{- if .Values.tolerations }}
+      tolerations: 
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- end }}  
+---

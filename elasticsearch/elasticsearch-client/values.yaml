@@ -1,0 +1,35 @@
+# Default values for elasticsearch-client.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image: 
+  repository: docker.elastic.co/elasticsearch/elasticsearch
+  tag: 7.3.0
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
+nodeSelector: 
+  used_for: monitoring
+tolerations: 
+- key: "dedicated"
+  operator: "Equal"
+  value: "monitoring"
+  effect: "NoExecute"
+
+environmentVariables:
+- name: "ES_JAVA_OPTS"
+  value: -Xms256m -Xmx256m
+
+xpack:
+# see https://www.elastic.co/guide/en/x-pack/current/xpack-settings.html
+  security:
+    enabled: false
+  monitoring:
+    collection:
+      enables: false
