@@ -6,7 +6,7 @@ There are following charts available:
 
 - [Elasticsearch 7.3.0](https://github.com/gofynd/helm-charts/tree/master/elasticsearch)
 
-- - elasticsearch-master
+  - elasticsearch-master
   - elasticsearch-data
   - elasticsearch-client
 
