@@ -1,29 +1,33 @@
-## Fluent-bit Helm Chart
 
-This helm chart is for fluentibit 7.3.0. 
+
+<p align="center">
+  <img  src="../assets/images/fluentbit.png">
+</p>
+
+## Fluent-bit
+
+[Fluent Bit](https://fluentbit.io/) is an open source and multi-platform **Log Processor and Forwarder** which allows you to collect data/logs from different sources, unify and send them to multiple destinations. It's fully compatible with Docker and [Kubernetes](https://fluentbit.io/kubernetes/) environments.
 
 ## Chart details
 
 This chart will do the following:
 
-- Install a configmap for Fluent Bit
-- Install a daemonset that provisions Fluent Bit [per-host architecture]
+- Install a Configmap for Fluent Bit
+- Install a Daemonset that provisions Fluent Bit [per-host architecture]
 
 ## Installing the Chart
 
 To install the chart with the release name fluent-bit
 
-```
+```bash
 helm upgrade --recreate-pods --install fluent-bit . --namespace monitoring
 ```
 
 ## Uninstalling the charts
 
-```
+```bash
 helm del --purge fluent-bit
 ```
-
-
 
 ## Configuration
 

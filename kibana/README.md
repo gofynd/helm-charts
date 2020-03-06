@@ -1,6 +1,14 @@
-## Kibana Helm Chart
+<p align="center">
+  <img height="400px" src="../assets/images/kibana.png">
+</p>
 
-This helm chart is for Kibana 7.3.0. Dedicated nodes for elasticsearch and kibana are advised for installing kibana 7.3.0. It is configured according to the elasticsearch charts provided before. You can change configurations if you need.
+
+
+## Kibana
+
+[Kibana](https://www.elastic.co/kibana) is an open source data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
+
+This helm chart is for Kibana 7.3.0. Dedicated nodes for Elasticsearch and Kibana are advised for installing Kibana 7.3.0. It is configured according to the Elasticsearch charts provided before. You can change configurations if you need.
 
 ## Chart details
 
@@ -21,7 +29,7 @@ kubectl label nodes <node_name> used_for=monitoring
 
 ## Installing the Chart
 
-To install the chart with the release name kibana
+To install the chart with the release name Kibana
 
 ```
 helm upgrade --recreate-pods --install kibana . --namespace monitoring
