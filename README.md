@@ -1,6 +1,6 @@
-
-
-![HELM Charts](assets/images/helm.png)
+<p align="center">
+  <img  src="assets/images/helm.png">
+</p>
 
 ## HELM Charts
 
