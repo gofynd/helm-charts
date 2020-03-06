@@ -1,20 +1,16 @@
-```
- _   _ _____ _     __  __    ____ _   _    _    ____ _____ ____  
-| | | | ____| |   |  \/  |  / ___| | | |  / \  |  _ \_   _/ ___| 
-| |_| |  _| | |   | |\/| | | |   | |_| | / _ \ | |_) || | \___ \ 
-|  _  | |___| |___| |  | | | |___|  _  |/ ___ \|  _ < | |  ___) |
-|_| |_|_____|_____|_|  |_|  \____|_| |_/_/   \_\_| \_\|_| |____/ 
-```
-Public HELM charts from Fynd.
 
-There are following charts available:
 
-- [Elasticsearch 7.3.0](https://github.com/gofynd/helm-charts/tree/master/elasticsearch)
+![HELM Charts](assets\images\helm.png)
 
-  - elasticsearch-master
-  - elasticsearch-data
-  - elasticsearch-client
+## HELM Charts
 
-- [Fluent-bit 1.2.1](https://github.com/gofynd/helm-charts/tree/master/fluent-bit)
+This repository includes a few charts that we use on our kubernetes clusters.
 
-- [Kibana 7.3.0](https://github.com/gofynd/helm-charts/tree/master/kibana)
+Each chart has its own `README` with installation steps and configurable `values.yaml`.
+
+### List of charts available
+
+- [Elasticsearch](https://github.com/gofynd/helm-charts/tree/master/elasticsearch)
+- [Fluent-bit](https://github.com/gofynd/helm-charts/tree/master/fluent-bit)
+- [Kibana](https://github.com/gofynd/helm-charts/tree/master/kibana)
+
