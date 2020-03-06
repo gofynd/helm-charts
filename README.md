@@ -3,7 +3,9 @@
 </p>
 ## HELM Charts
 
-[![HELM Version](https://img.shields.io/badge/HELM-v2-green)](https://www.npmjs.com/package/tui-editor) [![license](https://img.shields.io/badge/license-Apache-blue)](https://github.com/nhn/tui.editor/blob/master/LICENSE) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)]([https://github.com/gofynd/helm-charts/labels/help%20wanted](https://github.com/gofynd/helm-charts/labels/help wanted)) 
+[![HELM Version](https://img.shields.io/badge/HELM-v2-green)](https://www.npmjs.com/package/tui-editor) 
+[![license](https://img.shields.io/badge/license-Apache-blue)](https://github.com/nhn/tui.editor/blob/master/LICENSE) 
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/gofynd/helm-charts/labels/help%20wanted) 
 
 This repository includes a few charts that we use on our Kubernetes clusters.
 
