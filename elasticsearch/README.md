@@ -60,7 +60,7 @@ kubectl delete namespace monitoring
 
 ## Configuration
 
-### [Elasticsearch Master](/elasticsearch-master/)
+### [Elasticsearch Master](elasticsearch-master)
 
 | Parameter                              | Description                                                  |                     Default                     |
 | :------------------------------------- | ------------------------------------------------------------ | :---------------------------------------------: |
@@ -74,7 +74,7 @@ kubectl delete namespace monitoring
 | `xpack.security.enabled`               | Enabling xpack security                                      |                      false                      |
 | `xpack.monitoring.collection.enabled`  | Monitoring collections for xpack                             |                      false                      |
 
-### [Elasticsearch Data](/elasticsearch-data/)
+### [Elasticsearch Data](elasticsearch-data)
 
 | Parameter                              | Description                                                  | Default                                         |
 | -------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
